@@ -1,0 +1,84 @@
+---
+title: "Kauany Kanitz dos Santos"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+library(WDI)
+
+
+options(scipen = 999) # REMOVER A NOT. CIENT.
+# DADOS EM PAINEL
+dadospib <- WDI(country = 'all',
+                indicator = 'NY.GDP.MKTP.CD')
+
+paises <- c('BR', 'US')
+
+dadospibbrus <- WDI(country = paises,
+                    indicator = 'NY.GDP.MKTP.CD')
+
+# CORTE TRANSVERSAL
+dadospib2023 <- WDI(country = 'all',
+                    indicator = 'NY.GDP.MKTP.CD',
+                    start = 2023, end = 2023)
+
+# SÉRIE TEMPORAL
+dadospibbr <- WDI(country = 'BR',
+                  indicator = 'NY.GDP.MKTP.CD')
+```
+
+## Meet Quarto
+
+Falar sobre a variável que você escolheram. Qual é a fonte? Medida?
+
+## GRÁFICO EM PAINEL
+
+Falar sobre o gráfico em painel.
+
+```{r}
+#| label: graficoempainel
+#| warning: false
+#| echo: false
+
+ggplot(dadospib,
+      mapping = aes(y = NY.GDP.MKTP.CD,
+                                   x = year)) +
+  geom_point()
+```
+
+## 
+
+## GRÁFICO DE DADOS EM CORTES TRANSVERSAL
+
+Falar sobre o gráfico
+
+```{r}
+#| label: graficocortetransversal
+#| warning: false
+#| echo: false
+
+ ggplot(dadospib2023,
+        mapping = aes(y = NY.GDP.MKTP.CD,
+                                  x = year)) +
+  geom_point()
+```
+
+## GRÁFICO DE DADOS DE SÉRIE TEMPORAL
+
+Falar sobre o gráfico
+
+```{r}
+#| label: graficoserietemporal
+#| warning: false
+#| echo: false
+
+  ggplot(dadospibbr,
+                    mapping = aes(y = NY.GDP.MKTP.CD,
+                                  x = year)) +
+  geom_line()
+```
